@@ -12,7 +12,4 @@ def register_routes(app: Flask) -> None:
 
     from .countries.country_route import country_bp
 
-    # from .orders.client_type_route import client_type_bp
-
     app.register_blueprint(country_bp)
-    # app.register_blueprint(client_type_bp)
