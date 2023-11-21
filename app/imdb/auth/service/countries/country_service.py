@@ -6,4 +6,5 @@ class CountryService(GeneralService):
     """
     Realisation of Country service.
     """
+
     _dao = country_dao

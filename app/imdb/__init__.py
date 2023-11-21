@@ -45,5 +45,6 @@ def _init_db(app: Flask) -> None:
         create_database(app.config[SQLALCHEMY_DATABASE_URI])
 
     import imdb.auth.domain
+
     with app.app_context():
         db.create_all()

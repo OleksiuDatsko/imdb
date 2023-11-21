@@ -11,6 +11,7 @@ class GeneralDAO(ABC):
     """
     The common realization of Data Access class.
     """
+
     _domain_type = None
     _session = db.session
 
@@ -86,7 +87,7 @@ class GeneralDAO(ABC):
             self._session.commit()
         except Exception:
             self._session.rollback()
-            raise 
+            raise
 
     def delete_all(self) -> None:
         """

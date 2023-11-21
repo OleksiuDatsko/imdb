@@ -12,6 +12,7 @@ class GeneralController(ABC):
     """
     The common realization of controller.
     """
+
     _service: GeneralService = None
 
     def find_all(self) -> List[object]:

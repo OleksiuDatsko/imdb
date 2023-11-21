@@ -12,7 +12,8 @@ if __name__ == "__main__":
 
     config_data = {
         "DEBUG": os.getenv("DEBUG") == "True",
-        "SQLALCHEMY_TRACK_MODIFICATIONS": os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS") == "True",
+        "SQLALCHEMY_TRACK_MODIFICATIONS": os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
+        == "True",
         "SQLALCHEMY_DATABASE_URI": os.getenv("SQLALCHEMY_DATABASE_URI"),
     }
     print(config_data, flush=True)

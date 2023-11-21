@@ -12,5 +12,5 @@ class CountryController(GeneralController):
     """
     Realisation of Country controller.
     """
+
     _service = country_service
-    

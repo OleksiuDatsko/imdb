@@ -38,5 +38,5 @@ class Country(db.Model, IDto):
         obj = Country(
             id=dto_dict.get("id"),
             name=dto_dict.get("name"),
-        ) 
+        )
         return obj

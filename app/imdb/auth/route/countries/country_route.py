@@ -44,7 +44,7 @@ def get_country(contry_id: int) -> Response:
 
 
 @country_bp.put("/<int:contry_id>")
-def put_coutry(contry_id: str) -> Response:
+def put_coutry(contry_id: int) -> Response:
     """
     Gets all objects from table using Service layer.
     :return: Response object
@@ -55,9 +55,8 @@ def put_coutry(contry_id: str) -> Response:
     return make_response("Country updated", HTTPStatus.OK)
 
 
-
 @country_bp.delete("/<int:contry_id>")
-def delete_client(contry_id: str) -> Response:
+def delete_client(contry_id: int) -> Response:
     """
     Deletes client by ID.
     :return: Response object
