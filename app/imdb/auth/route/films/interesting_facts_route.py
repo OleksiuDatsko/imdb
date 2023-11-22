@@ -1,65 +1,65 @@
-import logging
 from http import HTTPStatus
 
 from flask import Blueprint, Response, jsonify, request, make_response
-from imdb.auth.domain.countries.country import Country
+from imdb.auth.domain.films.interesting_facts import InterestingFact
 
-from imdb.auth.controller import country_controller as controller
+from imdb.auth.controller import interesting_facts_controler
 
-country_bp = Blueprint("countries", __name__, url_prefix="/countries/")
+interesting_fact_bp = Blueprint("interesting_facts", __name__, url_prefix="/interesting-facts/")
 
 
-@country_bp.get("")
+@interesting_fact_bp.get("")
 def get_all_coutries() -> Response:
     """
     Gets all objects from table using Service layer.
     :return: Response object
     """
+    
     return make_response(
-        jsonify(controller.find_all(**request.args)),
+        jsonify(interesting_facts_controler.find_all(**request.args)),
         HTTPStatus.OK,
     )
 
 
-@country_bp.post("")
+@interesting_fact_bp.post("")
 def create_coutry() -> Response:
     """
     Gets all objects from table using Service layer.
     :return: Response object
     """
     content = request.get_json()
-    country = Country.create_from_dto(content)
-    controller.create(country)
+    country = InterestingFact.create_from_dto(content)
+    interesting_facts_controler.create(country)
     return make_response(jsonify(country.put_into_dto()), HTTPStatus.CREATED)
 
 
-@country_bp.get("/<int:contry_id>")
-def get_country(contry_id: int) -> Response:
+@interesting_fact_bp.get("/<int:id>")
+def get_country(id: int) -> Response:
     """
     Deletes client by ID.
     :return: Response object
     """
-    country = controller.find_by_id(contry_id)
+    country = interesting_facts_controler.find_by_id(id)
     return make_response(jsonify(country), HTTPStatus.CREATED)
 
 
-@country_bp.put("/<int:contry_id>")
-def put_coutry(contry_id: int) -> Response:
+@interesting_fact_bp.put("/<int:id>")
+def put_coutry(id: int) -> Response:
     """
     Gets all objects from table using Service layer.
     :return: Response object
     """
     content = request.get_json()
-    country = Country.create_from_dto(content)
-    controller.update(contry_id, country)
+    country = InterestingFact.create_from_dto(content)
+    interesting_facts_controler.update(id, country)
     return make_response("Country updated", HTTPStatus.OK)
 
 
-@country_bp.delete("/<int:contry_id>")
+@interesting_fact_bp.delete("/<int:id>")
 def delete_client(contry_id: int) -> Response:
     """
     Deletes client by ID.
     :return: Response object
     """
-    controller.delete(contry_id)
+    interesting_facts_controler.delete(contry_id)
     return make_response("Country deleted", HTTPStatus.OK)
