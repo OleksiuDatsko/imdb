@@ -5,7 +5,7 @@ from imdb.auth.domain.people.users import User
 
 from imdb.auth.controller import user_controller as controller
 
-# from imdb.auth.controller import interesting_facts_controler as additional_controller
+from imdb.auth.controller import review_controller
 
 
 user_bp = Blueprint("users", __name__, url_prefix="/users/")
@@ -44,6 +44,12 @@ def get_user(id: int) -> Response:
     """
     user = controller.find_by_id(id)
     return make_response(jsonify(user), HTTPStatus.CREATED)
+
+
+@user_bp.get("/<int:id>/reviews")
+def get_users_rewiews(id: int) -> Response:
+    reviews = review_controller.find_by_user(id)
+    return make_response(jsonify(reviews), HTTPStatus.CREATED)
 
 
 @user_bp.put("/<int:id>")

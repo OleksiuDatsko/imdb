@@ -5,7 +5,8 @@ from flask import Blueprint, Response, jsonify, request, make_response
 from imdb.auth.domain.films.films import Film
 
 from imdb.auth.controller import film_controller as controller
-from imdb.auth.controller import interesting_facts_controler as additional_controller
+from imdb.auth.controller import interesting_facts_controler
+from imdb.auth.controller import review_controller
 
 
 film_bp = Blueprint("films", __name__, url_prefix="/films/")
@@ -52,9 +53,19 @@ def get_interesting_facts_of_film(id: int) -> Response:
     Deletes client by ID.
     :return: Response object
     """
-    interesting_facts = additional_controller.find_by_film(id)
+    interesting_facts = interesting_facts_controler.find_by_film(id)
     print(interesting_facts, flush=True)
     return make_response(jsonify(interesting_facts), HTTPStatus.CREATED)
+
+@film_bp.get("/<int:id>/reviews/")
+def get_reviews_of_film(id: int) -> Response:
+    """
+    Deletes client by ID.
+    :return: Response object
+    """
+    reviews = review_controller.find_by_film(id)
+    print(reviews, flush=True)
+    return make_response(jsonify(reviews), HTTPStatus.CREATED)
 
 @film_bp.put("/<int:id>")
 def put_film(id: int) -> Response:
