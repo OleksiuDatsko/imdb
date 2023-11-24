@@ -1,12 +1,13 @@
 from __future__ import annotations
-import re
 from typing import Any
+from sqlalchemy import Column, Integer, String, Text, DECIMAL
+from sqlalchemy.orm import relationship
 
 from imdb import db
 from imdb.auth.domain.i_dto import IDto
 
-
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, DECIMAL
+from .genres import film_genre_association
+from ..countries.country import film_country_association
 
 
 class Film(db.Model, IDto):
@@ -22,13 +23,26 @@ class Film(db.Model, IDto):
     point = Column(DECIMAL(2, 1))
     year = Column(String(4))
 
-    # country_id = Column(Integer, ForeignKey('country.id'))
-    # country = db.relationship("Country", backref="country")  # only on the child class
+    # 1:M
+    interesting_facts = relationship(
+        "InterestingFact", back_populates="film", cascade="all, delete-orphan"
+    )
+    reviews = relationship(
+        "Review", back_populates="film", cascade="all, delete-orphan"
+    )
+
+    # M:M
+    countries = relationship(
+        "Country", secondary=film_country_association, back_populates="films"
+    )
+    genres = relationship(
+        "Genre", secondary=film_genre_association, back_populates="films"
+    )
 
     def __repr__(self) -> str:
         return f"Film('{self.id}', '{self.name}', '{self.description}', '{self.point}')"
 
-    def put_into_dto(self, all=None) -> dict[str, Any]:
+    def put_into_dto(self) -> dict[str, Any]:
         """
         Puts domain object into DTO without relationship
         :return: DTO object as dictionary
@@ -38,7 +52,9 @@ class Film(db.Model, IDto):
             "name": self.name,
             "description": self.description,
             "point": self.point,
-            "year": self.year
+            "year": self.year,
+            "genres": [genre.name for genre in self.genres],
+            "countries": [country.name for country in self.countries],
         }
 
     @staticmethod
@@ -53,6 +69,6 @@ class Film(db.Model, IDto):
             name=dto_dict.get("name"),
             description=dto_dict.get("description"),
             point=dto_dict.get("point"),
-            year=dto_dict.get("year")
+            year=dto_dict.get("year"),
         )
         return obj

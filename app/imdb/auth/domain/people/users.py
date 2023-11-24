@@ -6,6 +6,8 @@ from imdb.auth.domain.i_dto import IDto
 
 
 from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
 
 
 class User(db.Model, IDto):
@@ -21,7 +23,8 @@ class User(db.Model, IDto):
     info = Column(String(255))
 
     country_id = Column(Integer, ForeignKey("country.id"))
-    country = db.relationship("Country", backref="country")
+    country = relationship("Country", back_populates="users")
+    reviews = relationship("Review", back_populates="user")
 
     def __repr__(self) -> str:
         return f"User('{self.id}', '{self.first_name}', '{self.last_name}', '{self.info}', '{self.country_id}', '{self.country}')"

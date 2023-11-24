@@ -1,5 +1,4 @@
 from __future__ import annotations
-import re
 from typing import Any
 
 from imdb import db
@@ -7,7 +6,7 @@ from imdb.auth.domain.i_dto import IDto
 
 
 from sqlalchemy import Column, ForeignKey, Integer, String, Text, DECIMAL
-
+from sqlalchemy.orm import relationship
 
 class InterestingFact(db.Model, IDto):
     """
@@ -21,7 +20,7 @@ class InterestingFact(db.Model, IDto):
     more_info = Column(Text())
 
     film_id = Column(Integer, ForeignKey("film.id"))
-    film = db.relationship("Film", backref="film")  # only on the child class
+    film = relationship("Film", back_populates="interesting_facts")  # only on the child class
 
     def __repr__(self) -> str:
         return f"InterestingFact('{self.id}', '{self.name}', '{self.more_info}', '{self.film_id}', '{self.film}')"

@@ -42,6 +42,16 @@ def get_country(contry_id: int) -> Response:
     country = controller.find_by_id(contry_id)
     return make_response(jsonify(country), HTTPStatus.OK)
 
+@country_bp.get("/<int:contry_id>/films")
+def get_country_films(contry_id: int) -> Response:
+    """
+    Deletes client by ID.
+    :return: Response object
+    """
+    films = controller.find_country_films(contry_id)
+    print(films, flush=True)
+    return make_response(jsonify(films), HTTPStatus.OK)
+
 
 @country_bp.put("/<int:contry_id>")
 def put_coutry(contry_id: int) -> Response:

@@ -1,6 +1,7 @@
 from .countries.country_dao import ContryDAO
 from .films.film_dao import FilmDAO
 from .films.interesting_facts_dao import InterestingFactDAO
+from .films.genre_dao import GenreDAO
 from .people.users_dao import UserDAO
 from .people.reviews_dao import ReviewDAO
 
@@ -9,3 +10,4 @@ film_dao = FilmDAO()
 interesting_fact_dao = InterestingFactDAO()
 user_dao = UserDAO()
 review_dao = ReviewDAO()
+genre_dao = GenreDAO()

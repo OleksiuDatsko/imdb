@@ -8,6 +8,7 @@ from imdb.auth.domain.i_dto import IDto
 
 
 from sqlalchemy import Column, Date, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
 
 class Review(db.Model, IDto):
@@ -23,10 +24,10 @@ class Review(db.Model, IDto):
     mark = Column(Integer)
 
     user_id = Column(Integer, ForeignKey("user.id"))
-    user = db.relationship("User", backref="review_user")
+    user = relationship("User", back_populates="reviews")
     
     film_id = Column(Integer, ForeignKey("film.id"))
-    film = db.relationship("Film", backref="review_film")
+    film = relationship("Film", back_populates="reviews")
     
 
     def __repr__(self) -> str:
