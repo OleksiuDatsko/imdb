@@ -49,7 +49,7 @@ def get_user(id: int) -> Response:
 @user_bp.get("/<int:id>/reviews")
 def get_users_rewiews(id: int) -> Response:
     reviews = review_controller.find_by_user(id)
-    return make_response(jsonify(reviews), HTTPStatus.CREATED)
+    return make_response(jsonify(reviews), HTTPStatus.OK)
 
 
 @user_bp.put("/<int:id>")

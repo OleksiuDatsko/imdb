@@ -41,7 +41,7 @@ def get_review(id: int) -> Response:
     :return: Response object
     """
     review = controller.find_by_id(id)
-    return make_response(jsonify(review), HTTPStatus.CREATED)
+    return make_response(jsonify(review), HTTPStatus.OK)
 
 
 @review_bp.put("/<int:id>")

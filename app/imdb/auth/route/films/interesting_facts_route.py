@@ -40,7 +40,7 @@ def get_country(id: int) -> Response:
     :return: Response object
     """
     country = interesting_facts_controler.find_by_id(id)
-    return make_response(jsonify(country), HTTPStatus.CREATED)
+    return make_response(jsonify(country), HTTPStatus.OK)
 
 
 @interesting_fact_bp.put("/<int:id>")

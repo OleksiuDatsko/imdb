@@ -44,7 +44,7 @@ def get_film(id: int) -> Response:
     :return: Response object
     """
     film = controller.find_by_id(id)
-    return make_response(jsonify(film), HTTPStatus.CREATED)
+    return make_response(jsonify(film), HTTPStatus.OK)
 
 
 @film_bp.get("/<int:id>/interesting-facts/")

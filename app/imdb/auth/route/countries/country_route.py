@@ -40,7 +40,7 @@ def get_country(contry_id: int) -> Response:
     :return: Response object
     """
     country = controller.find_by_id(contry_id)
-    return make_response(jsonify(country), HTTPStatus.CREATED)
+    return make_response(jsonify(country), HTTPStatus.OK)
 
 
 @country_bp.put("/<int:contry_id>")
