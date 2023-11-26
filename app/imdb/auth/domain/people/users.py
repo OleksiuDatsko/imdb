@@ -5,7 +5,7 @@ from imdb import db
 from imdb.auth.domain.i_dto import IDto
 
 
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, NotNullable, String
 from sqlalchemy.orm import relationship
 
 
@@ -22,7 +22,7 @@ class User(db.Model, IDto):
     last_name = Column(String(45))
     info = Column(String(255))
 
-    country_id = Column(Integer, ForeignKey("country.id"))
+    country_id = Column(Integer, ForeignKey("country.id"), nullable=False)
     country = relationship("Country", back_populates="users")
     reviews = relationship("Review", back_populates="user")
 

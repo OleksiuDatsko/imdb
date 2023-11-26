@@ -1,13 +1,15 @@
 from __future__ import annotations
+from tkinter.tix import Tree
 from typing import Any
+from xmlrpc.client import TRANSPORT_ERROR
 from sqlalchemy import Column, Integer, String, Text, DECIMAL
 from sqlalchemy.orm import relationship
 
 from imdb import db
 from imdb.auth.domain.i_dto import IDto
 
-from .genres import film_genre_association
-from ..countries.country import film_country_association
+from .genres import Genre, film_genre_association
+from ..countries.country import Country, film_country_association
 
 
 class Film(db.Model, IDto):
@@ -64,6 +66,11 @@ class Film(db.Model, IDto):
         :param dto_dict: DTO object
         :return: Domain object
         """
+        genres = db.session.query(Genre).filter(Genre.name.in_(dto_dict.get("genres_names"))).all()
+        countries = db.session.query(Country).filter(Country.name.in_(dto_dict.get("countries_names"))).all()
+        
+        print(dto_dict, flush=True)
+
         obj = Film(
             id=dto_dict.get("id"),
             name=dto_dict.get("name"),
@@ -71,4 +78,7 @@ class Film(db.Model, IDto):
             point=dto_dict.get("point"),
             year=dto_dict.get("year"),
         )
+        
+        obj.countries = countries
+        obj.genres=genres
         return obj
