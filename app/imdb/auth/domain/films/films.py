@@ -10,6 +10,7 @@ from imdb.auth.domain.i_dto import IDto
 
 from .genres import Genre, film_genre_association
 from ..countries.country import Country, film_country_association
+from ..people.film_crew_people import FilmCrewPerson, film_film_crew_person_association
 
 
 class Film(db.Model, IDto):
@@ -40,6 +41,9 @@ class Film(db.Model, IDto):
     genres = relationship(
         "Genre", secondary=film_genre_association, back_populates="films"
     )
+    film_crew_people = relationship(
+        "FilmCrewPerson", secondary=film_film_crew_person_association, back_populates="films"
+    )
 
     def __repr__(self) -> str:
         return f"Film('{self.id}', '{self.name}', '{self.description}', '{self.point}')"
@@ -57,6 +61,7 @@ class Film(db.Model, IDto):
             "year": self.year,
             "genres": [genre.name for genre in self.genres],
             "countries": [country.name for country in self.countries],
+            "crew": [{"name": crew_person.name, "role": crew_person.cast_role.name} for crew_person in self.film_crew_people]
         }
 
     @staticmethod
@@ -68,6 +73,7 @@ class Film(db.Model, IDto):
         """
         genres = db.session.query(Genre).filter(Genre.name.in_(dto_dict.get("genres_names"))).all()
         countries = db.session.query(Country).filter(Country.name.in_(dto_dict.get("countries_names"))).all()
+        crew = db.session.query(FilmCrewPerson).filter(FilmCrewPerson.id.in_(dto_dict.get("crew_people_ids"))).all()
         
         print(dto_dict, flush=True)
 
@@ -81,4 +87,5 @@ class Film(db.Model, IDto):
         
         obj.countries = countries
         obj.genres=genres
+        obj.film_crew_people = crew
         return obj

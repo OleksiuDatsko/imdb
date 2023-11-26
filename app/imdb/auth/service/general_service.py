@@ -49,6 +49,7 @@ class GeneralService(ABC):
         :param key: integer key (surrogate primary key)
         :param obj: object to create in Database
         """
+        print("update", id, flush=True)
         self._dao.update(key, obj)
 
     def patch(self, key: int, field_name: str, value: object) -> None:

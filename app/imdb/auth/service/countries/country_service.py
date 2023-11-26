@@ -16,3 +16,9 @@ class CountryService(GeneralService):
         if country is None:
             abort(HTTPStatus.NOT_FOUND)
         return country.films
+
+    def find_country_film_crew_people(self, id):
+        country = self._dao.find_by_id(id)
+        if country is None:
+            abort(HTTPStatus.NOT_FOUND)
+        return country.film_crew_people

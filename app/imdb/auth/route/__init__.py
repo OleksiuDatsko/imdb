@@ -16,6 +16,8 @@ def register_routes(app: Flask) -> None:
     from .films.genre_route import genre_bp
     from .people.user_route import user_bp
     from .people.reviews_route import review_bp
+    from .people.cast_roles_route import cast_role_bp
+    from .people.film_crew_people_route import film_crew_person_bp
 
     app.register_blueprint(country_bp)
     app.register_blueprint(film_bp)
@@ -23,3 +25,5 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(genre_bp)
     app.register_blueprint(user_bp)
     app.register_blueprint(review_bp)
+    app.register_blueprint(film_crew_person_bp)
+    app.register_blueprint(cast_role_bp)

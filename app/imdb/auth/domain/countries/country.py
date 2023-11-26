@@ -25,6 +25,7 @@ class Country(db.Model, IDto):
     name = Column(String(45))
     
     users = relationship("User", back_populates="country")
+    film_crew_people = relationship("FilmCrewPerson", back_populates="country")
 
     films = relationship("Film", secondary=film_country_association, back_populates="countries")
 

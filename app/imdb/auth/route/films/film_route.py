@@ -67,6 +67,16 @@ def get_reviews_of_film(id: int) -> Response:
     print(reviews, flush=True)
     return make_response(jsonify(reviews), HTTPStatus.CREATED)
 
+@film_bp.get("/<int:id>/crew/")
+def get_crew_of_film(id: int) -> Response:
+    """
+    Deletes client by ID.
+    :return: Response object
+    """
+    crew = controller.find_film_crew(id)
+    print(crew, flush=True)
+    return make_response(jsonify(crew), HTTPStatus.CREATED)
+
 @film_bp.put("/<int:id>")
 def put_film(id: int) -> Response:
     """

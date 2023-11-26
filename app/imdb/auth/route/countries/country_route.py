@@ -52,6 +52,16 @@ def get_country_films(contry_id: int) -> Response:
     print(films, flush=True)
     return make_response(jsonify(films), HTTPStatus.OK)
 
+@country_bp.get("/<int:contry_id>/film-crew-people")
+def get_country_film_crew_people(contry_id: int) -> Response:
+    """
+    Deletes client by ID.
+    :return: Response object
+    """
+    film_crew_people = controller.find_country_film_crew_people(contry_id)
+    print(film_crew_people, flush=True)
+    return make_response(jsonify(film_crew_people), HTTPStatus.OK)
+
 
 @country_bp.put("/<int:contry_id>")
 def put_coutry(contry_id: int) -> Response:
