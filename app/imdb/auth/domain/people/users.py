@@ -9,7 +9,6 @@ from sqlalchemy import Column, ForeignKey, Integer, NotNullable, String
 from sqlalchemy.orm import relationship
 
 
-
 class User(db.Model, IDto):
     """
     Model declaration for Data Mapper.

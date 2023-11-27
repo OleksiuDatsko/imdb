@@ -16,7 +16,7 @@ class GeneralService(ABC):
         Gets all objects from table using Data Access layer.
         :return: list of all objects
         """
-        
+
         return self._dao.find_all()
 
     def find_by_id(self, key: int) -> object:

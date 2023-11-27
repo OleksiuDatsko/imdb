@@ -10,7 +10,7 @@ class InterestingFactController(GeneralController):
     """
 
     _service = interesting_facts_service
-    
+
     def find_by_film(self, id: int) -> object:
         """
         Gets object from database table by integer key using from Service layer.

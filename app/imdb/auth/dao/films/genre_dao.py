@@ -10,4 +10,3 @@ class GenreDAO(GeneralDAO):
     """
 
     _domain_type = Genre
-

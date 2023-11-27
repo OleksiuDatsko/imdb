@@ -18,7 +18,7 @@ def get_all_films() -> Response:
     Gets all objects from table using Service layer.
     :return: Response object
     """
-    
+
     return make_response(
         jsonify(controller.find_all()),
         HTTPStatus.OK,
@@ -57,6 +57,7 @@ def get_interesting_facts_of_film(id: int) -> Response:
     print(interesting_facts, flush=True)
     return make_response(jsonify(interesting_facts), HTTPStatus.CREATED)
 
+
 @film_bp.get("/<int:id>/reviews/")
 def get_reviews_of_film(id: int) -> Response:
     """
@@ -67,6 +68,7 @@ def get_reviews_of_film(id: int) -> Response:
     print(reviews, flush=True)
     return make_response(jsonify(reviews), HTTPStatus.CREATED)
 
+
 @film_bp.get("/<int:id>/crew/")
 def get_crew_of_film(id: int) -> Response:
     """
@@ -76,6 +78,7 @@ def get_crew_of_film(id: int) -> Response:
     crew = controller.find_film_crew(id)
     print(crew, flush=True)
     return make_response(jsonify(crew), HTTPStatus.CREATED)
+
 
 @film_bp.put("/<int:id>")
 def put_film(id: int) -> Response:

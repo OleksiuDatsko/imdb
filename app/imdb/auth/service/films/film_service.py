@@ -10,10 +10,9 @@ class FilmService(GeneralService):
     """
 
     _dao = film_dao
-    
+
     def find_film_crew(self, id):
         film = self._dao.find_by_id(id)
         if film is None:
             abort(HTTPStatus.NOT_FOUND)
         return film.film_crew_people
-

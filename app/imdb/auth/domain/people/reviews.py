@@ -25,10 +25,9 @@ class Review(db.Model, IDto):
 
     user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship("User", back_populates="reviews")
-    
+
     film_id = Column(Integer, ForeignKey("film.id"))
     film = relationship("Film", back_populates="reviews")
-    
 
     def __repr__(self) -> str:
         return f"Review('{self.id}', '{self.date}', '{self.comment}', '{self.mark}', '{self.user_id}', '{self.film_id}', '{self.user}', '{self.film}')"

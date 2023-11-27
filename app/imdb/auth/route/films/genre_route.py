@@ -42,6 +42,7 @@ def get_genre(id: int) -> Response:
     genre = controller.find_by_id(id)
     return make_response(jsonify(genre), HTTPStatus.OK)
 
+
 @genre_bp.get("/<int:id>/films")
 def get_genre_films(id: int) -> Response:
     """

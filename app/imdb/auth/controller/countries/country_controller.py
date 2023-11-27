@@ -8,9 +8,12 @@ class CountryController(GeneralController):
     """
 
     _service = country_service
-    
+
     def find_country_films(self, id):
         return [film.put_into_dto() for film in self._service.find_country_films(id)]
 
     def find_country_film_crew_people(self, id):
-        return [film.put_into_dto() for film in self._service.find_country_film_crew_people(id)]
+        return [
+            film.put_into_dto()
+            for film in self._service.find_country_film_crew_people(id)
+        ]

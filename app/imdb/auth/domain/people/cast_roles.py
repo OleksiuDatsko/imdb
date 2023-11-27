@@ -8,6 +8,7 @@ from imdb.auth.domain.i_dto import IDto
 from sqlalchemy import Column, ForeignKey, Integer, NotNullable, String
 from sqlalchemy.orm import relationship
 
+
 class CastRole(db.Model, IDto):
     __tablename__ = "cast_role"
 

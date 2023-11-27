@@ -8,8 +8,7 @@ class ReviewsService(GeneralService):
     """
 
     _dao = review_dao
-    
-    
+
     def find_by_film(self, id) -> object:
         return self._dao.find_by_film(id)
 

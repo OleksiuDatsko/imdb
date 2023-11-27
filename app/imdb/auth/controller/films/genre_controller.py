@@ -8,6 +8,6 @@ class GenreController(GeneralController):
     """
 
     _service = genre_service
-    
+
     def find_genre_films(self, id):
         return [film.put_into_dto() for film in self._service.find_genre_films(id)]

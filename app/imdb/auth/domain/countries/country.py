@@ -8,11 +8,12 @@ from sqlalchemy import Column, Integer, String, Table, ForeignKey
 
 
 film_country_association = Table(
-    'film_country',
+    "film_country",
     db.Model.metadata,
-    Column('film_id', Integer, ForeignKey('film.id')),
-    Column('country_id', Integer, ForeignKey('country.id'))
+    Column("film_id", Integer, ForeignKey("film.id")),
+    Column("country_id", Integer, ForeignKey("country.id")),
 )
+
 
 class Country(db.Model, IDto):
     """
@@ -23,11 +24,13 @@ class Country(db.Model, IDto):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(45))
-    
+
     users = relationship("User", back_populates="country")
     film_crew_people = relationship("FilmCrewPerson", back_populates="country")
 
-    films = relationship("Film", secondary=film_country_association, back_populates="countries")
+    films = relationship(
+        "Film", secondary=film_country_association, back_populates="countries"
+    )
 
     def __repr__(self) -> str:
         return f"Country('{self.id}', '{self.name}')"
@@ -40,7 +43,7 @@ class Country(db.Model, IDto):
         return {
             "id": self.id,
             "name": self.name,
-        }    
+        }
 
     @staticmethod
     def create_from_dto(dto_dict: dict[str, Any]) -> Country:

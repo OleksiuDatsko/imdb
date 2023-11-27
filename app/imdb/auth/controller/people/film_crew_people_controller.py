@@ -10,4 +10,6 @@ class FilmCrewPersonController(GeneralController):
     _service = film_crew_person_service
 
     def find_crew_person_films(self, id):
-        return [film.put_into_dto() for film in self._service.find_crew_person_films(id)]
+        return [
+            film.put_into_dto() for film in self._service.find_crew_person_films(id)
+        ]

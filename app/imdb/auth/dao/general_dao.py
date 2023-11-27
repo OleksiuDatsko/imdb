@@ -14,7 +14,6 @@ class GeneralDAO(ABC):
 
     _domain_type = None
     _session = db.session
-    
 
     def find_all(self) -> List[object]:
         """

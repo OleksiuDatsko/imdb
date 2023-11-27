@@ -43,6 +43,7 @@ def get_film_crew_person(id: int) -> Response:
     film_crew_person = controller.find_by_id(id)
     return make_response(jsonify(film_crew_person), HTTPStatus.CREATED)
 
+
 @film_crew_person_bp.get("/<int:id>/films")
 def get_crew_person_films(id: int) -> Response:
     """

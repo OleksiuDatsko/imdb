@@ -42,7 +42,9 @@ class Film(db.Model, IDto):
         "Genre", secondary=film_genre_association, back_populates="films"
     )
     film_crew_people = relationship(
-        "FilmCrewPerson", secondary=film_film_crew_person_association, back_populates="films"
+        "FilmCrewPerson",
+        secondary=film_film_crew_person_association,
+        back_populates="films",
     )
 
     def __repr__(self) -> str:
@@ -61,7 +63,10 @@ class Film(db.Model, IDto):
             "year": self.year,
             "genres": [genre.name for genre in self.genres],
             "countries": [country.name for country in self.countries],
-            "crew": [{"name": crew_person.name, "role": crew_person.cast_role.name} for crew_person in self.film_crew_people]
+            "crew": [
+                {"name": crew_person.name, "role": crew_person.cast_role.name}
+                for crew_person in self.film_crew_people
+            ],
         }
 
     @staticmethod
@@ -71,10 +76,22 @@ class Film(db.Model, IDto):
         :param dto_dict: DTO object
         :return: Domain object
         """
-        genres = db.session.query(Genre).filter(Genre.name.in_(dto_dict.get("genres_names"))).all()
-        countries = db.session.query(Country).filter(Country.name.in_(dto_dict.get("countries_names"))).all()
-        crew = db.session.query(FilmCrewPerson).filter(FilmCrewPerson.id.in_(dto_dict.get("crew_people_ids"))).all()
-        
+        genres = (
+            db.session.query(Genre)
+            .filter(Genre.name.in_(dto_dict.get("genres_names")))
+            .all()
+        )
+        countries = (
+            db.session.query(Country)
+            .filter(Country.name.in_(dto_dict.get("countries_names")))
+            .all()
+        )
+        crew = (
+            db.session.query(FilmCrewPerson)
+            .filter(FilmCrewPerson.id.in_(dto_dict.get("crew_people_ids")))
+            .all()
+        )
+
         print(dto_dict, flush=True)
 
         obj = Film(
@@ -84,8 +101,9 @@ class Film(db.Model, IDto):
             point=dto_dict.get("point"),
             year=dto_dict.get("year"),
         )
-        
+
         obj.countries = countries
-        obj.genres=genres
+        obj.genres = genres
         obj.film_crew_people = crew
+
         return obj

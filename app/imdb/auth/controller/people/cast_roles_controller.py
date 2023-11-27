@@ -8,6 +8,9 @@ class CastRoleController(GeneralController):
     """
 
     _service = cast_role_service
-    
+
     def find_cast_role_film_crew_people(self, id):
-        return [film.put_into_dto() for film in self._service.find_cast_role_film_crew_people(id)]
+        return [
+            film.put_into_dto()
+            for film in self._service.find_cast_role_film_crew_people(id)
+        ]

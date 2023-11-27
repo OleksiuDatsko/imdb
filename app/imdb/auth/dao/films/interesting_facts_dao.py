@@ -21,7 +21,7 @@ class InterestingFactDAO(GeneralDAO):
             .order_by(InterestingFact.name)
             .all()
         )
-    
+
     def find_by_film(self, id) -> list:
         return (
             self._session.query(InterestingFact)

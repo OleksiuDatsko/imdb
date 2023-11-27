@@ -20,7 +20,7 @@ class GeneralController(ABC):
         Gets all objects from table using Service layer as DTO objects.
         :return: list of all objects as DTOs
         """
-        
+
         return list(map(lambda x: x.put_into_dto(), self._service.find_all()))
 
     def find_by_id(self, key: int) -> object:

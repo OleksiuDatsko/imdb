@@ -10,11 +10,12 @@ from sqlalchemy.orm import relationship
 
 
 film_genre_association = Table(
-    'film_genre',
+    "film_genre",
     db.Model.metadata,
-    Column('film_id', Integer, ForeignKey('film.id')),
-    Column('genre_id', Integer, ForeignKey('genre.id'))
+    Column("film_id", Integer, ForeignKey("film.id")),
+    Column("genre_id", Integer, ForeignKey("genre.id")),
 )
+
 
 class Genre(db.Model, IDto):
     """
@@ -25,8 +26,10 @@ class Genre(db.Model, IDto):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(45))
-    
-    films = relationship("Film", secondary=film_genre_association, back_populates="genres")
+
+    films = relationship(
+        "Film", secondary=film_genre_association, back_populates="genres"
+    )
 
     def __repr__(self) -> str:
         return f"Genre('{self.id}', '{self.name}', '{self.films}')"

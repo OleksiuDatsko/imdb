@@ -5,7 +5,9 @@ from imdb.auth.domain.films.interesting_facts import InterestingFact
 
 from imdb.auth.controller import interesting_facts_controler
 
-interesting_fact_bp = Blueprint("interesting_facts", __name__, url_prefix="/interesting-facts/")
+interesting_fact_bp = Blueprint(
+    "interesting_facts", __name__, url_prefix="/interesting-facts/"
+)
 
 
 @interesting_fact_bp.get("")
@@ -14,7 +16,7 @@ def get_all_coutries() -> Response:
     Gets all objects from table using Service layer.
     :return: Response object
     """
-    
+
     return make_response(
         jsonify(interesting_facts_controler.find_all(**request.args)),
         HTTPStatus.OK,
