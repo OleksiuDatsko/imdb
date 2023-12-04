@@ -54,6 +54,17 @@ def get_genre_films(id: int) -> Response:
     return make_response(jsonify(films), HTTPStatus.OK)
 
 
+@genre_bp.put("/<int:genre_id>/films/<int:film_id>/")
+def add_genre_to_film(genre_id: int, film_id: int) -> Response:
+    """
+    Deletes client by ID.
+    :return: Response object
+    """
+    films = controller.put_genre_to_film(genre_id, film_id)
+    print(films, flush=True)
+    return make_response("Film genres updated", HTTPStatus.OK)
+
+
 @genre_bp.put("/<int:id>")
 def put_coutry(id: int) -> Response:
     """

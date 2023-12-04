@@ -1,3 +1,4 @@
+from sqlalchemy import text
 from imdb.auth.dao.general_dao import GeneralDAO
 from imdb.auth.domain.films.films import Film
 
@@ -8,16 +9,6 @@ class FilmDAO(GeneralDAO):
     """
 
     _domain_type = Film
-
-    def find_by_name(self, name: str) -> list:
-        """
-        Gets Country objects from database table by name.
-        :param name: name value
-        :return: search objects
-        """
-        return (
-            self._session.query(Film)
-            .filter(Film.name == name)
-            .order_by(Film.name)
-            .all()
-        )
+        
+    def get_point_statistics(self, aggregate_type: str):
+        return self._session.execute(text(f"CALL get_films_point_statistics('{aggregate_type}')")).all()

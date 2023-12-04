@@ -23,6 +23,18 @@ def get_all_films() -> Response:
         jsonify(controller.find_all()),
         HTTPStatus.OK,
     )
+    
+@film_bp.get("<string:aggregate_type>/point")
+def get_all_films_point_statistics(aggregate_type: str) -> Response:
+    """
+    Gets all objects from table using Service layer.
+    :return: Response object
+    """
+
+    return make_response(
+        jsonify(controller.get_point_statistics(aggregate_type)),
+        HTTPStatus.OK,
+    )
 
 
 @film_bp.post("")

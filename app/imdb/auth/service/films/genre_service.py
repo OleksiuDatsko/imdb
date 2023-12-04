@@ -16,3 +16,6 @@ class GenreService(GeneralService):
         if genre is None:
             abort(HTTPStatus.NOT_FOUND)
         return genre.films
+    
+    def update_films_genres(self, genre_id, film_id):
+        self._dao.update_films_genres(genre_id, film_id)

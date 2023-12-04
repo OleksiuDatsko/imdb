@@ -2,6 +2,7 @@ from .countries.country import Country
 from .films.films import Film
 from .films.genres import Genre
 from .films.interesting_facts import InterestingFact
+from .films.studio import Studio
 from .people.reviews import Review
 from .people.users import User
 from .people.cast_roles import CastRole

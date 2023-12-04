@@ -25,6 +25,7 @@ class Film(db.Model, IDto):
     description = Column(Text())
     point = Column(DECIMAL(2, 1))
     year = Column(String(4))
+    studio_id = Column(Integer)
 
     # 1:M
     interesting_facts = relationship(
@@ -58,6 +59,7 @@ class Film(db.Model, IDto):
         return {
             "id": self.id,
             "name": self.name,
+            "studio_id": self.studio_id or "no stuDio" ,
             "description": self.description,
             "point": self.point,
             "year": self.year,
