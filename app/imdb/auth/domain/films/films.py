@@ -25,6 +25,7 @@ class Film(db.Model, IDto):
     description = Column(Text())
     point = Column(DECIMAL(2, 1))
     year = Column(String(4))
+    studio_id = Column(Integer)
 
     # 1:M
     interesting_facts = relationship(
@@ -58,13 +59,17 @@ class Film(db.Model, IDto):
         return {
             "id": self.id,
             "name": self.name,
+            "studio_id": self.studio_id or "no stuDio" ,
             "description": self.description,
             "point": self.point,
             "year": self.year,
             "genres": [genre.name for genre in self.genres],
             "countries": [country.name for country in self.countries],
             "crew": [
-                {"name": crew_person.name, "role": crew_person.cast_role.name}
+                {
+                    "name": crew_person.name,
+                    "role": crew_person.cast_role.name
+                }
                 for crew_person in self.film_crew_people
             ],
         }
@@ -100,6 +105,7 @@ class Film(db.Model, IDto):
             description=dto_dict.get("description"),
             point=dto_dict.get("point"),
             year=dto_dict.get("year"),
+            studio_id=dto_dict.get("studio_id")
         )
 
         obj.countries = countries

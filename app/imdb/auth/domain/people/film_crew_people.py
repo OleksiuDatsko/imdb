@@ -11,8 +11,8 @@ from sqlalchemy.orm import relationship
 film_film_crew_person_association = Table(
     "film_top_cast",
     db.Model.metadata,
-    Column("film_id", Integer, ForeignKey("film.id")),
-    Column("film_crew_person_id", Integer, ForeignKey("film_crew_person.id")),
+    Column("film_id", Integer, ForeignKey("film.id"), primary_key=True),
+    Column("film_crew_person_id", Integer, ForeignKey("film_crew_person.id"), primary_key=True),
 )
 
 

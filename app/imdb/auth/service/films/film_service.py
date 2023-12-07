@@ -16,3 +16,6 @@ class FilmService(GeneralService):
         if film is None:
             abort(HTTPStatus.NOT_FOUND)
         return film.film_crew_people
+    
+    def get_point_statistics(self, aggregate_type:str):
+        return self._dao.get_point_statistics(aggregate_type)
