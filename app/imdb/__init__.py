@@ -41,10 +41,10 @@ def _init_db(app: Flask) -> None:
     """
     db.init_app(app)
 
-    # if not database_exists(app.config[SQLALCHEMY_DATABASE_URI]):
-    #     create_database(app.config[SQLALCHEMY_DATABASE_URI])
+    if not database_exists(app.config[SQLALCHEMY_DATABASE_URI]):
+        create_database(app.config[SQLALCHEMY_DATABASE_URI])
 
-    # import t08_flask_mysql.app.my_project.auth.domain
+    import imdb.auth.domain
 
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()

@@ -12,9 +12,11 @@ if __name__ == "__main__":
 
     config_data = {
         "DEBUG": os.getenv("DEBUG") == "True",
-        "SQLALCHEMY_TRACK_MODIFICATIONS": os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS") == "True",
+        "SQLALCHEMY_TRACK_MODIFICATIONS": os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
+        == "True",
         "SQLALCHEMY_DATABASE_URI": os.getenv("SQLALCHEMY_DATABASE_URI"),
     }
+
     create_app(config_data).run(
         port=int(os.getenv("APP_PORT", "8000")),
         debug=True,

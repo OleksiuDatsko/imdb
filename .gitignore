@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 db1/
 .vscode/
+fill_db.sql
