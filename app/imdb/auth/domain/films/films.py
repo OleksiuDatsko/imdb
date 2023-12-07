@@ -66,7 +66,10 @@ class Film(db.Model, IDto):
             "genres": [genre.name for genre in self.genres],
             "countries": [country.name for country in self.countries],
             "crew": [
-                {"name": crew_person.name, "role": crew_person.cast_role.name}
+                {
+                    "name": crew_person.name,
+                    "role": crew_person.cast_role.name
+                }
                 for crew_person in self.film_crew_people
             ],
         }
@@ -102,6 +105,7 @@ class Film(db.Model, IDto):
             description=dto_dict.get("description"),
             point=dto_dict.get("point"),
             year=dto_dict.get("year"),
+            studio_id=dto_dict.get("studio_id")
         )
 
         obj.countries = countries
